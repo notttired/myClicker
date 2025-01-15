@@ -1,41 +1,41 @@
-
+import threading
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support.ui import WebDriverWait # supplies driver as argument
 from selenium.webdriver.support import expected_conditions as EC
+
+import time
+import random
+from datetime import datetime
 
 DRIVER_PATH = '/Users/max/Desktop/chromedriver/chromedriver'
 service = Service(DRIVER_PATH) # need to create service object using path
 driver = webdriver.Chrome(service=service)
+driver.get('https://student.iclicker.com/')
 
-# take in  list of things to search for, limit 50 items
-# enter location: searches close by prices
 
-class information:
-    def __init__(location, query, limit):
-        self.location = location
-        self.query = query
-        self.limit = limit
+wait = WebDriverWait(driver, 30) # catch exception
+join_wait = WebDriverWait(driver, 30)
 
-class websites:
-    def __init__(siteURL, search_XPATH, price_XPATH, weight_XPATH, info_XPATH, unit_price_XPATH):
-        self.siteURL = siteURL
-        self.search_XPATH = search_XPATH
-        self.price_XPATH = price_XPATH
-        self.weight_XPATH = weight_XPATH
-        self.info_XPATH = info_XPATH
-        self.unit_price_XPATH
+input("Please login")
 
-    
+join_button = join_wait.until(EC.element_to_be_clickable((By.ID, "btnJoin")))
+join_button.click()
 
-# data-automation-id, data-automation-price
+START_TIME = datetime.now()
 
-search_bar = driver.findElement(By.XPATH, "...")
+while True:
+    print("hi")
+    time.sleep(5)
+    current_time = datetime.now()
+    if ( 3 < (current_time.hour - START_TIME.hour)):
+        driver.quit()
+        exit()
+        break
 
-# Navigate to the URL
-driver.get('https://walmart.com')
-
-print(driver.page_source)
-# It's a good practice to close the browser when done
-driver.quit()
+    selectedButton = driver.find_element(By.CLASS_NAME, "btn-selected")
+    if (not selectedButton):
+        button_b = wait.until(EC.presence_of_element_located(By.ID, "multiple-choice-b"))
+        time.sleep(random.randint(10,20))
+        button_b.click()
