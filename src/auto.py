@@ -3,6 +3,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait # supplies driver as argument
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
 
 import time
 import random
@@ -21,9 +22,11 @@ info = {
     "course": os.getenv("course"),
 }
 
+options = Options()
+options.add_argument("--headless=new")
 DRIVER_PATH = '/Users/max/Desktop/chromedriver/chromedriver'
 service = Service(DRIVER_PATH) # need to create service object using path
-driver = webdriver.Chrome(service=service)
+driver = webdriver.Chrome(service=service, options=options)
 driver.get('https://student.iclicker.com/')
 
 wait = WebDriverWait(driver, 9000)
@@ -54,7 +57,6 @@ select_course()
 join()
 
 while True:
-    print("Iter")
     time.sleep(5)
     current_time = datetime.now()
     if ( 3 < (current_time.hour - START_TIME.hour)):
@@ -63,8 +65,11 @@ while True:
         break
 
     try:
+        print("Button already selected")
         selectedButton = driver.find_element(By.CLASS_NAME, "btn-selected")
     except:
         button_b = wait.until(EC.element_to_be_clickable((By.ID, "multiple-choice-b")))
+        print("Found button")
         time.sleep(random.randint(10,20))
+        print("Selecting")
         button_b.click()

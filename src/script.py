@@ -26,7 +26,6 @@ join_button.click()
 START_TIME = datetime.now()
 
 while True:
-    print("hi")
     time.sleep(5)
     current_time = datetime.now()
     if ( 3 < (current_time.hour - START_TIME.hour)):
@@ -34,8 +33,9 @@ while True:
         exit()
         break
 
-    selectedButton = driver.find_element(By.CLASS_NAME, "btn-selected")
-    if (not selectedButton):
-        button_b = wait.until(EC.presence_of_element_located(By.ID, "multiple-choice-b"))
+    try:
+        selectedButton = driver.find_element(By.CLASS_NAME, "btn-selected")
+    except:
+        button_b = wait.until(EC.element_to_be_clickable((By.ID, "multiple-choice-b")))
         time.sleep(random.randint(10,20))
         button_b.click()
