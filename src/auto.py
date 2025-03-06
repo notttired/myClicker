@@ -13,9 +13,12 @@ import os
 from dotenv import load_dotenv, dotenv_values 
 load_dotenv() 
 
-# accessing and printing value
+current_directory = os.path.dirname(os.path.realpath(__file__))
+DRIVER_PATH = os.path.join(current_directory, 'chromedriver', 'chromedriver')
 
 START_TIME = datetime.now()
+START_TIME_HOUR = START_TIME.hour
+
 info = {
     "email": os.getenv("email"),
     "password": os.getenv("password"),
@@ -24,13 +27,11 @@ info = {
 
 options = Options()
 options.add_argument("--headless=new")
-DRIVER_PATH = '/Users/max/Desktop/chromedriver/chromedriver'
 service = Service(DRIVER_PATH) # need to create service object using path
 driver = webdriver.Chrome(service=service, options=options)
 driver.get('https://student.iclicker.com/')
 
-wait = WebDriverWait(driver, 9000)
-page_wait = WebDriverWait(driver, 10)
+page_wait = WebDriverWait(driver, 15)
 
 def login():
     email = page_wait.until(EC.element_to_be_clickable((By.ID, "input-email")))
@@ -46,20 +47,22 @@ def select_course():
     course.click()
 
 def join():
-    join_wait = WebDriverWait(driver, 300)
+    join_wait = WebDriverWait(driver, 21600) # 6 hours
+    print("Waiting to join")
     join_button = join_wait.until(EC.element_to_be_clickable((By.ID, "btnJoin")))
     join_button.click()
-
-
+    print("Joined")
 
 login()
 select_course()
 join()
 
+wait = WebDriverWait(driver, 21600)
+
 while True:
     time.sleep(5)
-    current_time = datetime.now()
-    if ( 3 < (current_time.hour - START_TIME.hour)):
+    CURRENT_TIME = datetime.now()
+    if (CURRENT_TIME.hour - START_TIME_HOUR) >= 9:
         driver.quit()
         exit()
         break
