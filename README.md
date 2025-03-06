@@ -29,4 +29,4 @@ course="CS 135"
 ### Troubleshooting
 
 - The timeout for the program is 8 hours; the program will stop running 8 hours after start
-- Chromedriver version is incorrect error message => Find the latest version of chromedriver online and replace the one in the src folder
+- Chromedriver version is incorrect error message => Find the latest version of chromedriver online and replace the one in the src folder - https://googlechromelabs.github.io/chrome-for-testing/#stable
