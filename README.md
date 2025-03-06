@@ -7,7 +7,8 @@ auto.py => Automatic everything, requires .env file
 1. Create a file called .env in main folder
 2. Paste in the three lines below
 3. Modify the credentials to those of your own
-   **_ Keep the double quotation marks _**
+
+** Keep the double quotation marks **
 
 ### .env file contents
 
@@ -17,7 +18,7 @@ password="abcd"
 
 course="CS 135"
 
-**_ Course name must contain same whitespace as course name on iClicker _**
+** Course name must contain same whitespace as course name on iClicker **
 
 ## Running the program
 
