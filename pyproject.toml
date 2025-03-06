@@ -5,3 +5,4 @@ version = "0.1"
 [tool.poetry.dependencies]
 python = "^3.13.1"
 selenium = "^4.20.0"
+python-dotenv = "^1.0.1"
