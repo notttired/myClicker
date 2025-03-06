@@ -1,4 +1,5 @@
 script.py => Login and navigate to course are manual, Site opening and clicking are automatic
+
 auto.py => Automatic everything, requires .env file
 
 ## To use auto.py
@@ -11,7 +12,9 @@ auto.py => Automatic everything, requires .env file
 ### .env file contents
 
 email="j123smith@uwaterloo.ca"
+
 password="abcd"
+
 course="CS 135"
 
 **_ Course name must contain same whitespace as course name on iClicker _**
