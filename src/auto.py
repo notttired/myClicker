@@ -35,10 +35,17 @@ page_wait = WebDriverWait(driver, 15)
 
 def login():
     email = page_wait.until(EC.element_to_be_clickable((By.ID, "input-email")))
+    email.click()
     email.send_keys(info["email"])
     password = page_wait.until(EC.element_to_be_clickable((By.ID, "input-password")))
+    password.click()
     password.send_keys(info["password"])
 
+    try:
+        cookies = page_wait.until(EC.element_to_be_clickable((By.ID, "onetrust-reject-all-handler")))
+        cookies.click()
+    except:
+        pass
     submit = page_wait.until(EC.element_to_be_clickable((By.ID, "sign-in-button")))
     submit.click()
 
